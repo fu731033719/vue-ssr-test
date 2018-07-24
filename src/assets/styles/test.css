@@ -1,4 +1,4 @@
-body{
+body {
   color: red;
-  background: url('../images/done.svg');
+  background-image: url('../images/done.svg')
 }
