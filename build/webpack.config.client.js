@@ -7,19 +7,19 @@ const baseConfig = require('./webpack.config.base')
 const isDev = process.env.NODE_ENV === 'development'
 const defaultPluins = [
   new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: isDev ? '"development"' : '"production"'
-      }
-    }),
-    new HTMLPlugin()
+    'process.env': {
+      NODE_ENV: isDev ? '"development"' : '"production"'
+    }
+  }),
+  new HTMLPlugin()
 ]
 const devServer = {
-    port: 8000,
-    host: '0.0.0.0',
-    overlay: {
-      errors: true,
-    },
-    hot: true
+  port: 8000,
+  host: '0.0.0.0',
+  overlay: {
+    errors: true,
+  },
+  hot: true
 }
 let config
 if (isDev) {
@@ -38,7 +38,7 @@ if (isDev) {
             //     module: true,
             //     localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]',
             //   }
-            // },
+            // },使用CSSmodule编译模式
             {
               loader: 'postcss-loader',
               options: {
