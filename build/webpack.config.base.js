@@ -2,6 +2,7 @@ const path = require('path')
 const createvueLoaderOptions = require('./vue-loader.config.js')
 const isDev = process.env.NODE_ENV === 'development'
 const config = {
+  mode: process.env.NODE_ENV || 'production',
   target: 'web',
   entry: path.join(__dirname, '../client/index.js'),
   output: {
@@ -27,8 +28,8 @@ const config = {
       },
       {
         test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.(gif|jpg|jpeg|png|svg)$/,

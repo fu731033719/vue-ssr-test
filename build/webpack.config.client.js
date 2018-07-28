@@ -1,7 +1,8 @@
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-const ExtractPlugin = require('extract-text-webpack-plugin')
+// const ExtractPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin  = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const isDev = process.env.NODE_ENV === 'development'
@@ -52,15 +53,15 @@ if (isDev) {
     },
     devServer,
     plugins: defaultPluins.concat([
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.HotModuleReplacementPlugin()
+      // new webpack.NoEmitOnErrorsPlugin()
     ])
   })
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
-      vendor: ['vue']
+      app: path.join(__dirname, '../client/index.js')
+      // vendor: ['vue']
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -69,30 +70,52 @@ if (isDev) {
       rules: [
         {
           test: /\.styl/,
-          use: ExtractPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              'css-loader',
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true,
-                }
-              },
-              'stylus-loader'
-            ]
-          })
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+              }
+            },
+            'css-loader',
+            'stylus-loader'
+          ]
+          // use: ExtractPlugin.extract({
+          //   fallback: 'style-loader',
+          //   use: [
+          //     'css-loader',
+          //     {
+          //       loader: 'postcss-loader',
+          //       options: {
+          //         sourceMap: true,
+          //       }
+          //     },
+          //     'stylus-loader'
+          //   ]
+          // })
+
         }
       ]
     },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      },
+      runtimeChunk: true
+    },
     plugins: defaultPluins.concat([
-      new ExtractPlugin('styles.[contentHash:8].css'),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
+      // new ExtractPlugin('styles.[contentHash:8].css')
+      new MiniCssExtractPlugin({
+        filename: 'styles.[name].[contentHash:8].css',
+        chunkFilename: 'styles.[id].[contentHash:8].css'
       })
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'vendor'
+      // }),
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'runtime'
+      // })
     ])
   })
 }
