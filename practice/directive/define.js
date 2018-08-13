@@ -34,25 +34,33 @@ const component = {
     }
   }
 }
+const CompVue = Vue.extend(component)
 
-new Vue({
+new CompVue({
   el: '#root',
-  data: {
-    text: 0,
-    propone: 1
-  },
-  components: {
-    CompOne: component
-  },
-  template: `
-  <div>
-    <comp-one :active="true" :prop-one="propone" @change='handleChange'></comp-one>
-    <comp-one :active="false" :prop-one="2"></comp-one>
-  </div>
-  `,
-  methods: {
-    handleChange () {
-      this.propone += 1
-    }
+  propsData: {
+    propOne: 6666
   }
 })
+
+// new Vue({
+//   el: '#root',
+//   data: {
+//     text: 0,
+//     propone: 1
+//   },
+//   components: {
+//     CompOne: component
+//   },
+//   template: `
+//   <div>
+//     <comp-one :active="true" :prop-one="propone" @change='handleChange'></comp-one>
+//     <comp-one :active="false" :prop-one="2"></comp-one>
+//   </div>
+//   `,
+//   methods: {
+//     handleChange () {
+//       this.propone += 1
+//     }
+//   }
+// })

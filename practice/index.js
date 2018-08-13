@@ -3,4 +3,7 @@
 // import './data-binding/index'
 // import './computed/index'
 // import './directive/index'
-import './directive/define'
+// import './directive/define'
+// import './directive/v-model'
+// import './directive/feature'
+import './directive/render'
