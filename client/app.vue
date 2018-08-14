@@ -5,6 +5,7 @@
     <!-- <todo></todo> -->
     <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
+    <!-- <router-link to="/login/exact">login exact</router-link> -->
     <router-view />
     <Footer></Footer>
   </div>

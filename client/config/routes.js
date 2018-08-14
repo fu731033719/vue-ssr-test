@@ -14,4 +14,8 @@ export default [
     path: '/login',
     component: Login
   }
+  // {
+  //   path: '/login/exact',
+  //   component: Login
+  // }
 ]
