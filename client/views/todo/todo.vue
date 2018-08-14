@@ -19,6 +19,7 @@
       @toggle="toggleFilter"
       @clearAllCompleted="clearAllCompleted"
     />
+    <!-- <router-view/> -->
   </section>
 </template>
 
@@ -27,6 +28,12 @@ import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
 export default {
+  // 组件内部路由守卫
+  beforeRouteEnter: (to, from, next) => {
+    console.log('组件内部路由守卫')
+    next()
+  },
+  props: ['id'],
   data () {
     return {
       todos: [],
@@ -36,6 +43,9 @@ export default {
   components: {
     Item,
     Tabs
+  },
+  mounted () {
+    console.log(this.id)
   },
   computed: {
     filteredTodos () {

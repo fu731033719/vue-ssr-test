@@ -5,9 +5,13 @@
     <!-- <todo></todo> -->
     <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
+    <router-link :to="{name: 'app'}">nameAlert</router-link>
     <!-- <router-link to="/login/exact">login exact</router-link> -->
-    <router-view />
+    <transition name="fade">
+      <router-view />
+    </transition>
     <Footer></Footer>
+    <!-- <router-view name="a" /> -->
   </div>
 </template>
 
@@ -21,6 +25,9 @@ export default {
     Header,
     Footer,
     Todo
+  },
+  mounted () {
+    console.log(this.$route)
   }
 }
 </script>
