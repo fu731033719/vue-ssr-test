@@ -5,7 +5,6 @@
     <!-- <p>{{count}}</p> -->
     <p>{{counter}}</p>
     <p>{{fullName}}</p>
-    <p>{{textA}}</p>
     <!-- <todo></todo> -->
     <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
@@ -54,10 +53,11 @@ export default {
     //   time: 2000
     // })
   },
+  methods: {
+    ...mapActions(['updateCountSync']),
+    ...mapMutations(['updateCount'])
+  },
   computed: {
-    textA () {
-      return this.$store.state.a.text
-    },
     // ...mapState(['count']),
     ...mapState({
       counter: (state) => state.count
@@ -65,12 +65,11 @@ export default {
     // count () {
     //   return this.$store.state.count
     // },
-    ...mapGetters(['fullName']),
+    // ...mapGetters(['fullName', 'a/textPlus'])
+    ...mapGetters(['fullName'])
     // fullName (state) {
     //   return this.$store.getters.fullName
     // }
-    ...mapActions(['updateCountSync']),
-    ...mapMutations(['updateCount'])
   }
 }
 </script>

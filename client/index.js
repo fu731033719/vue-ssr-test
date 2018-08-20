@@ -9,6 +9,11 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 const router = createRouter()
 const store = createStore()
+store.registerModule('c', {
+  state: {
+    text: 3
+  }
+})
 // 全局路由守卫
 router.beforeEach((to, from, next) => {
   console.log('before each invoked')
