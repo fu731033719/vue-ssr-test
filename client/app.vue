@@ -5,6 +5,7 @@
     <!-- <p>{{count}}</p> -->
     <p>{{counter}}</p>
     <p>{{fullName}}</p>
+    <p>{{textA}}</p>
     <!-- <todo></todo> -->
     <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
@@ -24,7 +25,9 @@ import Footer from './layout/footer.jsx'
 import Todo from './views/todo/todo.vue'
 import {
   mapState,
-  mapGetters
+  mapGetters,
+  mapActions,
+  mapMutations
 } from 'vuex'
 export default {
   components: {
@@ -36,11 +39,25 @@ export default {
     console.log(this.$store)
     console.log(this.$route)
     let i = 1
+    // setInterval(() => {
+    //   this.$store.commit('updateCount', i++)
+    // }, 1000)
     setInterval(() => {
-      this.$store.commit('updateCount', i++)
+      this.updateCount(i++)
     }, 1000)
+    // this.$store.dispatch('updateCountSync', {
+    //   count: 5,
+    //   time: 2000
+    // })
+    // this.updateCountSync({
+    //   count: 5,
+    //   time: 2000
+    // })
   },
   computed: {
+    textA () {
+      return this.$store.state.a.text
+    },
     // ...mapState(['count']),
     ...mapState({
       counter: (state) => state.count
@@ -48,10 +65,12 @@ export default {
     // count () {
     //   return this.$store.state.count
     // },
-    ...mapGetters(['fullName'])
+    ...mapGetters(['fullName']),
     // fullName (state) {
     //   return this.$store.getters.fullName
     // }
+    ...mapActions(['updateCountSync']),
+    ...mapMutations(['updateCount'])
   }
 }
 </script>
