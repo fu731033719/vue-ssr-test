@@ -44,10 +44,10 @@ export default {
     setInterval(() => {
       this.updateCount(i++)
     }, 1000)
-    // this.$store.dispatch('updateCountSync', {
-    //   count: 5,
-    //   time: 2000
-    // })
+    this.$store.dispatch('updateCountSync', {
+      count: 5,
+      time: 2000
+    })
     // this.updateCountSync({
     //   count: 5,
     //   time: 2000
