@@ -11,7 +11,8 @@
     "clean": "rimraf dist",
     "lint": "eslint --ext .js --ext .jsx --ext .vue client/",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js"
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+    "dev:server": "cross-env NODE_ENV=development node server/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,7 +23,7 @@
     "koa-router": "^7.4.0",
     "vue": "2.5.13",
     "vue-router": "^3.0.1",
-    "vue-server-renderer": "^2.5.17",
+    "vue-server-renderer": "^2.5.13",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
