@@ -5,7 +5,7 @@ const fs = require('fs')
 const MemoryFS = require('memory-fs')
 const webpack = require('webpack')
 const VueServerRenderer = require('vue-server-renderer')
-const serverRender = require('vue-server-renderer')
+const serverRender = require('./server.render')
 const serverConfig = require('../../build/webpack.config.server')
 
 const serverCompiler = webpack(serverConfig)
@@ -31,16 +31,17 @@ serverCompiler.watch({}, (err, stats) => {
 })
 
 const handleSSR = async (ctx) => {
-  if (bundle) {
+  if (!bundle) {
     ctx.body = 'wait a min'
     return
   }
   const clientManifestResp = await axios.get(
-    'http://127.0.0.1:8000/vue-ssr-client-manifest.json'
+    'http://127.0.0.1:8000/public/vue-ssr-client-manifest.json'
   )
   const clientManifest = clientManifestResp.data
   const template = fs.readFileSync(
-    path.join(__dirname, '../server.template.ejs')
+    path.join(__dirname, '../server.template.ejs'),
+    'utf-8'
   )
   const renderer = VueServerRenderer.createBundleRenderer(bundle, {
     inject: false,

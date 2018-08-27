@@ -8,7 +8,7 @@ import createRouter from './config/router'
 
 import './assets/styles/global.styl'
 Vue.use(VueRouter)
-Vue.uer(Vuex)
+Vue.use(Vuex)
 export default () => {
   const router = createRouter()
   const store = createStore()
