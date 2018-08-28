@@ -29,6 +29,9 @@ import {
   mapMutations
 } from 'vuex'
 export default {
+  metaInfo: {
+    title: 'Dany SSR test'
+  },
   components: {
     Header,
     Footer,
