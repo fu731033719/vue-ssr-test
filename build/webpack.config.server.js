@@ -12,7 +12,8 @@ config = merge(baseConfig, {
   output: {
     libraryTarget: 'commonjs2',
     filename: 'server-entry.js',
-    path: path.join(__dirname, '../server-build')
+    path: path.join(__dirname, '../server-build'),
+    publicPath: '/public/'
   },
   externals: Object.keys(require('../package.json').dependencies),
   module: {
