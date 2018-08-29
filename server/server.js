@@ -1,11 +1,11 @@
 const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
-const pageRouter = require('./routers/dev.ssr')
+
 const app = new Koa()
 
 const isDev = process.env.NODE_ENV === 'development'
-
+const staticRouter = require('./routers/static')
 app.use(async (ctx, next) => {
   try {
     console.log(`requset with path ${ctx.path}`)
@@ -27,6 +27,13 @@ app.use(async (ctx, next) => {
     await next()
   }
 })
+app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
+let pageRouter
+if (isDev) {
+  pageRouter = require('./routers/dev.ssr')
+} else {
+  pageRouter = require('./routers/ssr')
+}
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 
 const HOST = process.env.HOST || '0.0.0.0'
