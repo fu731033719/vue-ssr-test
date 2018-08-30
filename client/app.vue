@@ -3,16 +3,17 @@
     <div id="cover"></div>
     <Header></Header>
     <!-- <p>{{count}}</p> -->
-    <p>{{counter}}</p>
-    <p>{{fullName}}</p>
+    <!-- <p>{{counter}}</p>
+    <p>{{fullName}}</p> -->
     <!-- <todo></todo> -->
-    <router-link to="/app">app</router-link>
+    <!-- <router-link to="/app">app</router-link>
     <router-link to="/login">login</router-link>
-    <router-link :to="{name: 'app'}">nameAlert</router-link>
+    <router-link :to="{name: 'app'}">nameAlert</router-link> -->
     <!-- <router-link to="/login/exact">login exact</router-link> -->
     <transition name="fade">
       <router-view />
     </transition>
+    <notification content="note"/>  
     <Footer></Footer>
     <!-- <router-view name="a" /> -->
   </div>
