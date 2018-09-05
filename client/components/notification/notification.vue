@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade">
-    <div class="notification">
+  <transition name="fade" @after-leave="afterLeave">
+    <div class="notification" :style="style" v-show="visible">
       <span class="content">{{content}}</span>
       <a class="btn" @click="handleClose">{{btn}}</a>
     </div>
@@ -20,10 +20,23 @@
         default: '关闭'
       }
     },
+    data () {
+      return {
+        visible: true
+      }
+    },
+    computed: {
+      style () {
+        return {}
+      }
+    },
     methods: {
       handleClose (e) {
         e.preventDefault()
         this.$emit('close')
+      },
+      afterLeave () {
+        this.$emit('closed')
       }
     }
   }

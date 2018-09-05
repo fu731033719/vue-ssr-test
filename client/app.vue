@@ -13,7 +13,8 @@
     <transition name="fade">
       <router-view />
     </transition>
-    <notification content="note"/>  
+    <button @click="notify"></button>
+    <!-- <notification content="note"/>   -->
     <Footer></Footer>
     <!-- <router-view name="a" /> -->
   </div>
@@ -59,7 +60,12 @@ export default {
   },
   methods: {
     ...mapActions(['updateCountSync']),
-    ...mapMutations(['updateCount'])
+    ...mapMutations(['updateCount']),
+    notify () {
+      this.$notify({
+        content: 'test $notify'
+      })
+    }
   },
   computed: {
     // ...mapState(['count']),
