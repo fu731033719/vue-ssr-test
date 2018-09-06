@@ -10,6 +10,12 @@
     <router-link to="/login">login</router-link>
     <router-link :to="{name: 'app'}">nameAlert</router-link> -->
     <!-- <router-link to="/login/exact">login exact</router-link> -->
+    <!-- <tabs>
+      <tab label="text">
+        <span slot="label"></span>
+        <p>ctx</p>
+      </tab>
+    </tabs> -->
     <transition name="fade">
       <router-view />
     </transition>
