@@ -7,10 +7,16 @@ const instances = []
 let seed = 1
 const removeInstance = (instance) => {
   if (!instance) return
-  // const len = instances.length
+  const len = instances.length
   const index = instances.findIndex(inst => instance.id === inst.id)
 
-  instance.splice(index, 1)
+  instances.splice(index, 1)
+
+  if (len <= 1) return
+  const removeHeight = instance.vm.height
+  for (let i = index; i < len - 1; i++) {
+    instances[i].verticalOffset = parseInt(instances[i].verticalOffset) - removeHeight - 16
+  }
 }
 const notify = (options) => {
   if (Vue.prototype.$isServer) return
@@ -38,10 +44,14 @@ const notify = (options) => {
   verticalOffset += 16
   instance.verticalOffset = verticalOffset
   instances.push(instance)
+  instance.vm.visible = true
   instance.vm.$on('closed', () => {
     removeInstance(instance)
     document.body.removeChild(instance.vm.$el)
     instance.vm.$destroy()
+  })
+  instance.vm.$on('close', () => {
+    instance.vm.visible = false
   })
   return instance.vm
 }
