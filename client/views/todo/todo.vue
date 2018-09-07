@@ -1,9 +1,15 @@
 <template>
   <section class="real-app">
+    <div class="tab-container">
+      <tabs :value="filter" @change="handleChangeTab">
+        <tab :label="item" :index="item" v-for="item in stats" :key="item"></tab>
+      </tabs>
+    </div>
     <input
       type="text"
       class="add-input"
       autofocus="autofocus"
+      v-model="inputContent"
       placeholder="接下去要做什么？"
       @keyup.enter="addTodo"
     >
@@ -13,10 +19,9 @@
       :key="todo.id"
       @del="deleteTodo"
     />
-    <tabs
+    <helper
       :filter="filter"
       :todos="todos"
-      @toggle="toggleFilter"
       @clearAllCompleted="clearAllCompleted"
     />
     <!-- <router-view/> -->
@@ -25,7 +30,7 @@
 
 <script>
 import Item from './item.vue'
-import Tabs from './tabs.vue'
+import Helper from './helper.vue'
 let id = 0
 export default {
   // 组件内部路由守卫
@@ -37,12 +42,14 @@ export default {
   data () {
     return {
       todos: [],
-      filter: 'all'
+      filter: 'all',
+      stats: ['all', 'active', 'completed'],
+      inputContent: ''
     }
   },
   components: {
     Item,
-    Tabs
+    Helper
   },
   mounted () {
     console.log(this.id)
@@ -73,6 +80,9 @@ export default {
     },
     clearAllCompleted () {
       this.todos = this.todos.filter(todo => !todo.completed)
+    },
+    handleChangeTab (value) {
+      this.filter = value
     }
   }
 }
@@ -104,6 +114,10 @@ export default {
   border: none;
   box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
 }
+.tab-container
+  background-color #fff
+  padding 0 15px
+
 </style>
 
 
