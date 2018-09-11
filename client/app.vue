@@ -13,7 +13,7 @@
     <transition name="fade">
       <router-view />
     </transition>
-    <button @click="notify"></button>
+    <!-- <button @click="notify"></button> -->
     <!-- <notification content="note"/>   -->
     <Footer></Footer>
     <!-- <router-view name="a" /> -->
