@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const send = require('koa-send')
 const path = require('path')
-
+const koaBody = require('koa-body')
 const app = new Koa()
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -35,6 +35,7 @@ app.use(async (ctx, next) => {
     await next()
   }
 })
+app.use(koaBody())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
 app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 let pageRouter
