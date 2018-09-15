@@ -29,9 +29,12 @@
 </template>
 
 <script>
+import {
+  mapState,
+  mapActions
+} from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
-let id = 0
 export default {
   // 组件内部路由守卫
   beforeRouteEnter: (to, from, next) => {
@@ -52,9 +55,10 @@ export default {
     Helper
   },
   mounted () {
-    console.log(this.id)
+    this.fetchTodos()
   },
   computed: {
+    ...mapState(['todos']),
     filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
@@ -64,14 +68,15 @@ export default {
     }
   },
   methods: {
-    addTodo (e) {
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value.trim(),
-        completed: false
-      })
-      e.target.value = ''
-    },
+    ...mapActions(['fetchTodos']),
+    // addTodo (e) {
+    //   this.todos.unshift({
+    //     id: id++,
+    //     content: e.target.value.trim(),
+    //     completed: false
+    //   })
+    //   e.target.value = ''
+    // },
     deleteTodo (id) {
       this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
     },
