@@ -4,5 +4,8 @@ export default {
   },
   fillTodos (state, todos) {
     state.todos = todos
+  },
+  doLogin (state, userInfo) {
+    state.user = userInfo
   }
 }
