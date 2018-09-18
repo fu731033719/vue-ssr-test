@@ -13,7 +13,7 @@
     <router-link to="/login">login</router-link>
     <router-link :to="{name: 'app'}">nameAlert</router-link> -->
     <!-- <router-link to="/login/exact">login exact</router-link> -->
-    <transition name="fade">
+    <transition name="fade" mode="out-in">
       <router-view />
     </transition>
     <!-- <button @click="notify"></button> -->
@@ -107,14 +107,6 @@ export default {
   background-color #999
   opacity .9
   z-index -1
-}
-#loading{
-  width 100%
-  height 100%
-  position absolute
-  z-index 100
-  background rgba(0,0,0,.2)
-  top 0
 }
 </style>
 
