@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <div id="cover"></div>
+    <div id="loading" v-show="loading">
+      <loading></loading>
+    </div>
     <Header></Header>
     <!-- <p>{{count}}</p> -->
     <!-- <p>{{counter}}</p>
@@ -24,6 +27,7 @@
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
 import Todo from './views/todo/todo.vue'
+import Loading from './components/loading/loading.vue'
 import {
   mapState,
   mapGetters,
@@ -37,7 +41,8 @@ export default {
   components: {
     Header,
     Footer,
-    Todo
+    Todo,
+    Loading
   },
   mounted () {
     console.log(this.$store)
@@ -69,9 +74,10 @@ export default {
   },
   computed: {
     // ...mapState(['count']),
-    ...mapState({
-      counter: (state) => state.count
-    }),
+    ...mapState(['loading']),
+    // ...mapState({
+    //   counter: (state) => state.count
+    // }),
     // count () {
     //   return this.$store.state.count
     // },
@@ -101,6 +107,14 @@ export default {
   background-color #999
   opacity .9
   z-index -1
+}
+#loading{
+  width 100%
+  height 100%
+  position absolute
+  z-index 100
+  background rgba(0,0,0,.2)
+  top 0
 }
 </style>
 
