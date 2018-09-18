@@ -89,10 +89,11 @@ export default {
       this.filter = state
     },
     toggleTodoState (todo) {
+      console.log(todo)
       this.updateTodo({
         id: todo.id,
         todo: Object.assign({}, todo, {
-          computed: !todo.completed
+          completed: !todo.completed
         })
       })
     },
