@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { createError } from './util'
 const request = axios.create({
+  // baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:3333/' : '/'
   baseURL: '/'
 })
 
@@ -17,6 +18,7 @@ const handleRequest = (request) => {
       resolve(data.data)
     }).catch(err => {
       const resp = err.response
+      console.log('-------------', resp)
       if (resp.status === 401) {
         reject(createError(401, 'need auth'))
       }

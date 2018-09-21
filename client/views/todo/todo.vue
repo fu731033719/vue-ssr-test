@@ -36,6 +36,8 @@ import {
 } from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
+// import { setTimeout } from 'timers'
+// import { resolve } from 'url'
 export default {
   // 组件内部路由守卫
   beforeRouteEnter: (to, from, next) => {
@@ -56,6 +58,9 @@ export default {
   },
   mounted () {
     this.fetchTodos()
+  },
+  asyncDate ({ store }) {
+    return store.dispatch('fetchTodos')
   },
   computed: {
     ...mapState(['todos']),
