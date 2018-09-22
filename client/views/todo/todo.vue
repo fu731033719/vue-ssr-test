@@ -57,10 +57,15 @@ export default {
     Helper
   },
   mounted () {
-    this.fetchTodos()
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
   asyncDate ({ store }) {
-    return store.dispatch('fetchTodos')
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    return Promise.resolve()
   },
   computed: {
     ...mapState(['todos']),

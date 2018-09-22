@@ -3,6 +3,11 @@ import createApp from './create-app'
 export default context => {
   return new Promise((resolve, reject) => {
     const { app, router, store } = createApp()
+
+    if (context.user) {
+      store.state.user = context.user
+    }
+
     // store 传入值暂时隐藏
     router.push(context.url)
 
@@ -19,8 +24,8 @@ export default context => {
           })
         }
       })).then(data => {
-        console.log(store.state)
         context.meta = app.$meta()
+        context.state = store.state
         resolve(app)
       })
     })
