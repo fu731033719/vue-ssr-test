@@ -61,10 +61,11 @@ export default {
       this.fetchTodos()
     }
   },
-  asyncDate ({ store }) {
+  asyncDate ({ store, router }) {
     if (store.state.user) {
       return store.dispatch('fetchTodos')
     }
+    router.replace('/login')
     return Promise.resolve()
   },
   computed: {
