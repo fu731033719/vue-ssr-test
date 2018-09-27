@@ -13,7 +13,7 @@ export default [
     props: (route) => ({id: route.query.b}),
     // props存在2种使用方法，可以传入Boolean在该组件的props内直接获取/router/xxx后的xxx值 或者直接传入route对象获取内部的某值
     // component: ToDo,
-    component: () => import('../views/todo/todo.vue'),
+    component: () => import(/* webpackChunkName: "todo-view" */ '../views/todo/todo.vue'),
     // 通过访问后再加载component的方式可以提高页面性能
     // components: {
     //   default: ToDo,
@@ -36,7 +36,7 @@ export default [
   },
   {
     path: '/login',
-    component: () => import('../views/login/login.vue')
+    component: () => import(/* webpackChunkName: "login-view" */ '../views/login/login.vue')
     // component: Login
   }
   // {

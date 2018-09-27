@@ -3,8 +3,21 @@ const ExtractPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-// const VueServerPlugin = require('vue-server-renderer/server-plugin')
+const VueServerPlugin = require('vue-server-renderer/server-plugin')
 let config
+const isDev = process.env.NODE_ENV === 'development'
+const plugins = [
+  new ExtractPlugin('style'),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'process.env.VUE_ENV': '"server"'
+  })
+]
+
+if (isDev) {
+  plugins.push(new VueServerPlugin())
+}
+
 config = merge(baseConfig, {
   target: 'node',
   entry: path.join(__dirname, '../client/server-entry.js'),
@@ -39,14 +52,7 @@ config = merge(baseConfig, {
       ]
     }]
   },
-  plugins: [
-    new ExtractPlugin('style'),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"server"'
-    })
-    // new VueServerPlugin()
-  ]
+  plugins
 })
 config.resolve = {
   alias: {
