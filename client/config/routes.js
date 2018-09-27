@@ -37,6 +37,7 @@ export default [
   {
     path: '/login',
     component: () => import('../views/login/login.vue')
+    // component: Login
   }
   // {
   //   path: '/login/exact',

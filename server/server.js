@@ -50,7 +50,8 @@ app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
 app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 let pageRouter
 if (isDev) {
-  pageRouter = require('./routers/dev.ssr')
+  // pageRouter = require('./routers/dev.ssr')
+  pageRouter = require('./routers/dev.ssr.no.bundle')
 } else {
   pageRouter = require('./routers/ssr')
 }
